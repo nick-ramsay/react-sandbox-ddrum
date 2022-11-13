@@ -1,24 +1,36 @@
-import logo from './logo.svg';
+import React, { } from 'react';
+import keys from "./keys";
+import { datadogRum } from '@datadog/browser-rum';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import './App.css';
+
+import Home from "../src/pages/Home/Home";
+
+datadogRum.init({
+    applicationId: keys.datadog.dd_app_id_rum,
+    clientToken: keys.datadog.dd_client_token_rum,
+    site: keys.datadog.dd_site,
+    service:'rum-react-sandbox',
+    
+    // Specify a version number to identify the deployed version of your application in Datadog 
+    // version: '1.0.0',
+    sampleRate: 100,
+    sessionReplaySampleRate: 100,
+    trackInteractions: true,
+    trackResources: true,
+    trackLongTasks: true,
+    defaultPrivacyLevel:'mask-user-input'
+});
+    
+datadogRum.startSessionReplayRecording();
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Routes>  
+          <Route exact path="/" element={<Home />} />
+      </Routes>
+    </Router>
   );
 }
 
