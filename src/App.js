@@ -30,7 +30,7 @@ datadogLogs.init({
   site: keys.datadog.dd_site,
   forwardErrorsToLogs: true,
   sampleRate: 100,
-}
+});
 
 function App() {
   return (
