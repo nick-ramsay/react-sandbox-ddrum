@@ -1,6 +1,7 @@
 import React, { } from 'react';
 import keys from "./keys";
 import { datadogRum } from '@datadog/browser-rum';
+import { datadogLogs } from '@datadog/browser-logs';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import './App.css';
 
@@ -23,6 +24,13 @@ datadogRum.init({
 });
     
 datadogRum.startSessionReplayRecording();
+
+datadogLogs.init({
+  clientToken: keys.datadog.dd_client_token_rum,
+  site: keys.datadog.dd_site,
+  forwardErrorsToLogs: true,
+  sampleRate: 100,
+}
 
 function App() {
   return (
