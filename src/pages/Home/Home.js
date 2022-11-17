@@ -169,17 +169,17 @@ const Home = () => {
           <div className="row">
             <div className="col-md-6">
               <button className="btn btn-sm btn-outline-danger" onClick={ () => setNewMessage(newMessage => "")}>
-                Generate Console Error
+                Generate Error
               </button>
             </div>
             <div className="col-md-6">
               <button
                 className="btn btn-sm btn-outline-warning"
                 onClick={() =>
-                  datadogLogs.logger.warn("User clicked 'Generate Console Log' button")
+                  datadogLogs.logger.warn("User clicked 'Generate Browser Log' button", {"custom_timestamp": new Date()})
                 }
               >
-                Generate Console Log
+                Generate Browser Log
               </button>
             </div>
           </div>
