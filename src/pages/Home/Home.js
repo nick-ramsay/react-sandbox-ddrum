@@ -31,8 +31,8 @@ const weekday = [
 ];
 
 const Home = () => {
-  var [newMessage, setNewMessage] = useInput("");
   var [messages, setMessages] = useState([]);
+  var [testHook, setTestHook] = useInput();
 
   const renderMessages = () => {
     let currentMessages = localStorage.getItem("messages");
@@ -43,10 +43,11 @@ const Home = () => {
 
   const saveMessage = (event) => {
     let tempMessages = messages;
+    let newMessage = document.getElementById("messageInput").value;
     if (newMessage !== "") {
       tempMessages.unshift({
         date: Date(),
-        message: newMessage,
+        message: newMessage
       });
       localStorage.setItem("messages", JSON.stringify(tempMessages));
       document.getElementById("messageInput").value = "";
@@ -95,7 +96,6 @@ const Home = () => {
                     className="form-control"
                     id="messageInput"
                     name="messageInput"
-                    onChange={setNewMessage}
                     aria-describedby="messageHelp"
                   />
                 </div>
@@ -168,7 +168,7 @@ const Home = () => {
           </div>
           <div className="row">
             <div className="col-md-6">
-              <button className="btn btn-sm btn-outline-danger" onClick={ () => setNewMessage(newMessage => "")}>
+              <button className="btn btn-sm btn-outline-danger" onClick={ () => setTestHook(testHook => "")}>
                 Generate Error
               </button>
             </div>
