@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { datadogRum } from '@datadog/browser-rum';
 import { datadogLogs } from "@datadog/browser-logs";
 import { useInput } from "../../sharedFunctions/sharedFunctions";
 import logo from "../../../src/logo.svg";
@@ -47,7 +48,7 @@ const Home = () => {
     if (newMessage !== "") {
       tempMessages.unshift({
         date: Date(),
-        message: newMessage
+        message: newMessage,
       });
       localStorage.setItem("messages", JSON.stringify(tempMessages));
       document.getElementById("messageInput").value = "";
@@ -65,6 +66,21 @@ const Home = () => {
 
   useEffect(() => {
     renderMessages();
+
+    let startTime = 0;
+
+    setTimeout(() => {
+      startTime = Date.now();
+    }, 200);
+
+    setTimeout(() => {
+      console.log(Date.now() - startTime);
+
+      datadogRum.setGlobalContextProperty('time_diff', {
+        time_diff: Date.now() - startTime
+    });
+    }, 1300);
+
   }, []);
 
   return (
@@ -168,7 +184,10 @@ const Home = () => {
           </div>
           <div className="row">
             <div className="col-md-6">
-              <button className="btn btn-sm btn-outline-danger" onClick={ () => setTestHook(testHook => "")}>
+              <button
+                className="btn btn-sm btn-outline-danger"
+                onClick={() => setTestHook((testHook) => "")}
+              >
                 Generate Error
               </button>
             </div>
@@ -176,7 +195,10 @@ const Home = () => {
               <button
                 className="btn btn-sm btn-outline-warning"
                 onClick={() =>
-                  datadogLogs.logger.warn("User clicked 'Generate Browser Log' button", {"custom_timestamp": new Date()})
+                  datadogLogs.logger.warn(
+                    "User clicked 'Generate Browser Log' button",
+                    { custom_timestamp: new Date() }
+                  )
                 }
               >
                 Generate Browser Log
