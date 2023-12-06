@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { datadogRum } from '@datadog/browser-rum';
+import { datadogRum } from "@datadog/browser-rum";
 import { datadogLogs } from "@datadog/browser-logs";
 import { useInput } from "../../sharedFunctions/sharedFunctions";
 import logo from "../../../src/logo.svg";
@@ -76,18 +76,39 @@ const Home = () => {
     setTimeout(() => {
       console.log(Date.now() - startTime);
 
-      datadogRum.setGlobalContextProperty('time_diff', {
-        time_diff: Date.now() - startTime
-    });
+      /*
+      datadogRum.setGlobalContextProperty("time_diff", {
+        time_diff: Date.now() - startTime,
+      });
+      */
     }, 1300);
-
   }, []);
+
+  let datadogTrackingUuid = "Testing123Uuid";
+  let redirectUri = "Testing123Uri";
 
   return (
     <div>
       <div className="App">
         <header className="App-header p-4">
-          <h1>React Sandbox for Datadog RUM</h1>
+          <h1
+            onClick={() => {
+              datadogRum.addAction("starting exchangeAuthCode", {
+                ts: new Date().toISOString(),
+                datadogTrackingUuid,
+              });
+              datadogRum.addError(
+                new Error("codeVerifier is null in exchangeAuthCode"),
+                {
+                  ts: new Date().toISOString(),
+                  datadogTrackingUuid,
+                  redirectUri,
+                }
+              );
+            }}
+          >
+            React Sandbox for Datadog RUM
+          </h1>
           <img src={logo} className="App-logo" alt="logo" />
           <p>
             Edit <code>src/pages/Home/Home.js</code> and save to reload.
@@ -123,6 +144,7 @@ const Home = () => {
                     className="btn btn-custom"
                     tabIndex="0"
                     onClick={saveMessage}
+                    data-dd-action-name="Clicked Custom Action Button Again"
                   >
                     Submit
                   </div>
@@ -183,7 +205,7 @@ const Home = () => {
             </a>
           </div>
           <div className="row">
-            <div className="col-md-6">
+            <div className="col-md-3">
               <button
                 className="btn btn-sm btn-outline-danger"
                 onClick={() => setTestHook((testHook) => "")}
@@ -191,7 +213,22 @@ const Home = () => {
                 Generate Error
               </button>
             </div>
-            <div className="col-md-6">
+            <div className="col-md-3">
+              <button
+                className="btn btn-sm btn-outline-danger"
+                onClick={() => {
+                  console.log(datadogRum.getInternalContext().session_id);
+                  datadogRum.addError("My error message goes here", {
+                    session_id: datadogRum.getInternalContext().session_id,
+                    name: "Lily",
+                    color: "White",
+                  });
+                }}
+              >
+                Generate Manual Error
+              </button>
+            </div>
+            <div className="col-md-3">
               <button
                 className="btn btn-sm btn-outline-warning"
                 onClick={() =>
@@ -202,6 +239,18 @@ const Home = () => {
                 }
               >
                 Generate Browser Log
+              </button>
+            </div>
+            <div className="col-md-3">
+              <button
+                className="btn btn-sm btn-outline-light"
+                data-dd-action-name="Clicked Custom Action Button Again"
+                data-dd-action-example_id="123customid456"
+                onClick={() => {
+                  console.log("Clicked custom action button!");
+                }}
+              >
+                Custom Action Name
               </button>
             </div>
           </div>
