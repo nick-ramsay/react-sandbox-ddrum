@@ -12,7 +12,7 @@ datadogRum.init({
   clientToken: keys.datadog.dd_client_token_rum,
   site: keys.datadog.dd_site,
   service: "rum-react-sandbox",
-
+  env: "staging",
   // Specify a version number to identify the deployed version of your application in Datadog
   // version: '1.0.0',
   sampleRate: 100,
@@ -21,6 +21,9 @@ datadogRum.init({
   trackResources: true,
   trackLongTasks: true,
   defaultPrivacyLevel: "mask-user-input",
+  allowedTracingUrls: [
+    { match: "https:\/\/dummyjson\.com", propagatorTypes: ["datadog"]}
+  ],
   beforeSend: (event) => {
     // remove email from view url
     if (

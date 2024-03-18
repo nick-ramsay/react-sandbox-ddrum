@@ -64,6 +64,12 @@ const Home = () => {
     renderMessages();
   };
 
+  const fetchDummyJson = () => {
+    fetch('https://dummyjson.com/products/1')
+      .then(res => res.json())
+      .then(json => console.log(json))
+  }
+
   useEffect(() => {
     renderMessages();
 
@@ -155,7 +161,7 @@ const Home = () => {
               {messages.length === 0
                 ? "No Messages"
                 : messages.length +
-                  (messages.length > 1 ? " messages" : " message")}
+                (messages.length > 1 ? " messages" : " message")}
             </p>
             {messages.map((message, i) => (
               <div className="col-md-12 mt-2 mb-2 message-card" key={i}>
@@ -194,64 +200,73 @@ const Home = () => {
             ))}
           </div>
           <div className="col-md-12 pt-3 pb-3">
-            <a
-              href="https://github.com/nick-ramsay/react-sandbox-ddrum"
-              target="_blank"
-              rel="noopener noreferrer"
-              title="Check out this repo on GitHub!"
-              className="github-link"
-            >
-              <img className="github-logo" src={GithubLogo} alt="GitHub_logo" />
-            </a>
-          </div>
-          <div className="row">
-            <div className="col-md-3">
-              <button
-                className="btn btn-sm btn-outline-danger"
-                onClick={() => setTestHook((testHook) => "")}
-              >
-                Generate Error
-              </button>
+            <div className="row">
+              <div className="col-md-3">
+                <button
+                  className="btn btn-sm btn-outline-danger"
+                  onClick={() => setTestHook((testHook) => "")}
+                >
+                  Generate Error
+                </button>
+              </div>
+              <div className="col-md-3">
+                <button
+                  className="btn btn-sm btn-outline-danger"
+                  onClick={() => {
+                    console.log(datadogRum.getInternalContext().session_id);
+                    datadogRum.addError("My error message goes here", {
+                      session_id: datadogRum.getInternalContext().session_id,
+                      name: "Lily",
+                      color: "White",
+                    });
+                  }}
+                >
+                  Generate Manual Error
+                </button>
+              </div>
+              <div className="col-md-3">
+                <button
+                  className="btn btn-sm btn-outline-warning"
+                  onClick={() =>
+                    datadogLogs.logger.warn(
+                      "User clicked 'Generate Browser Log' button",
+                      { custom_timestamp: new Date() }
+                    )
+                  }
+                >
+                  Generate Browser Log
+                </button>
+              </div>
+              <div className="col-md-3">
+                <button
+                  className="btn btn-sm btn-outline-light"
+                  data-dd-action-name="Clicked Custom Action Button Again"
+                  data-dd-action-example_id="123customid456"
+                  onClick={() => {
+                    console.log("Clicked custom action button!");
+                  }}
+                >
+                  Custom Action Name
+                </button>
+              </div>
             </div>
-            <div className="col-md-3">
-              <button
-                className="btn btn-sm btn-outline-danger"
-                onClick={() => {
-                  console.log(datadogRum.getInternalContext().session_id);
-                  datadogRum.addError("My error message goes here", {
-                    session_id: datadogRum.getInternalContext().session_id,
-                    name: "Lily",
-                    color: "White",
-                  });
-                }}
-              >
-                Generate Manual Error
-              </button>
+            <div className="row mt-3">
+              <div className="col-md-12">
+                <button className="btn btn-sm btn-outline-secondary" onClick={() => fetchDummyJson()}>
+                  Call dummyJSON
+                </button>
+              </div>
             </div>
-            <div className="col-md-3">
-              <button
-                className="btn btn-sm btn-outline-warning"
-                onClick={() =>
-                  datadogLogs.logger.warn(
-                    "User clicked 'Generate Browser Log' button",
-                    { custom_timestamp: new Date() }
-                  )
-                }
+            <div className="row mt-2">
+              <a
+                href="https://github.com/nick-ramsay/react-sandbox-ddrum"
+                target="_blank"
+                rel="noopener noreferrer"
+                title="Check out this repo on GitHub!"
+                className="github-link"
               >
-                Generate Browser Log
-              </button>
-            </div>
-            <div className="col-md-3">
-              <button
-                className="btn btn-sm btn-outline-light"
-                data-dd-action-name="Clicked Custom Action Button Again"
-                data-dd-action-example_id="123customid456"
-                onClick={() => {
-                  console.log("Clicked custom action button!");
-                }}
-              >
-                Custom Action Name
-              </button>
+                <img className="github-logo" src={GithubLogo} alt="GitHub_logo" />
+              </a>
             </div>
           </div>
         </div>
