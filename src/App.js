@@ -22,7 +22,7 @@ datadogRum.init({
   trackLongTasks: true,
   defaultPrivacyLevel: "mask-user-input",
   allowedTracingUrls: [
-    { match: "https:\/\/dummyjsons\.com", propagatorTypes: ["datadog"]}
+    { match: "https:\/\/dummyjson\.com", propagatorTypes: ["datadog"]}
   ],
   beforeSend: (event) => {
     // remove email from view url
