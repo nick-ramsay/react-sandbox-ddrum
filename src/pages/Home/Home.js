@@ -147,7 +147,7 @@ const Home = () => {
                 <div className="col mt-3">
                   <div
                     type="button"
-                    className="btn btn-custom"
+                    className="btn btn-sm btn-custom"
                     tabIndex="0"
                     onClick={saveMessage}
                     data-dd-action-name="Clicked Custom Action Button Again"
@@ -157,7 +157,9 @@ const Home = () => {
                 </div>
               </div>
             </form>
-            <p style={{ color: "#e83e8c" }} className="mt-3 mb-1">
+            <hr></hr>
+            <h5>Message List</h5>
+            <p style={{ color: "#e83e8c" }} className=" mb-1">
               {messages.length === 0
                 ? "No Messages"
                 : messages.length +
@@ -199,19 +201,21 @@ const Home = () => {
               </div>
             ))}
           </div>
+          <hr></hr>
+          <h5>Manually Trigger RUM Events</h5>
           <div className="col-md-12 pt-3 pb-3">
             <div className="row">
               <div className="col-md-3">
                 <button
-                  className="btn btn-sm btn-outline-danger"
+                  className="btn btn-sm btn-outline-danger m-2"
                   onClick={() => setTestHook((testHook) => "")}
                 >
-                  Generate Error
+                  Trigger Error
                 </button>
               </div>
               <div className="col-md-3">
                 <button
-                  className="btn btn-sm btn-outline-danger"
+                  className="btn btn-sm btn-outline-danger m-2"
                   onClick={() => {
                     console.log(datadogRum.getInternalContext().session_id);
                     datadogRum.addError("My error message goes here", {
@@ -226,7 +230,7 @@ const Home = () => {
               </div>
               <div className="col-md-3">
                 <button
-                  className="btn btn-sm btn-outline-warning"
+                  className="btn btn-sm btn-outline-warning m-2"
                   onClick={() =>
                     datadogLogs.logger.warn(
                       "User clicked 'Generate Browser Log' button",
@@ -239,7 +243,7 @@ const Home = () => {
               </div>
               <div className="col-md-3">
                 <button
-                  className="btn btn-sm btn-outline-light"
+                  className="btn btn-sm btn-outline-light m-2"
                   data-dd-action-name="Clicked Custom Action Button Again"
                   data-dd-action-example_id="123customid456"
                   onClick={() => {
@@ -250,13 +254,14 @@ const Home = () => {
                 </button>
               </div>
             </div>
-            <div className="row mt-3">
-              <div className="col-md-12">
+            <div className="row">
+              <div className="col-md-12 m-2">
                 <button className="btn btn-sm btn-outline-secondary" onClick={() => fetchDummyJson()}>
-                  Call dummyJSON
+                  Call DummyJSON
                 </button>
               </div>
             </div>
+            <hr></hr>
             <div className="row mt-2">
               <a
                 href="https://github.com/nick-ramsay/react-sandbox-ddrum"

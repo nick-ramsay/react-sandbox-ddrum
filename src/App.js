@@ -17,12 +17,13 @@ datadogRum.init({
   // version: '1.0.0',
   sampleRate: 100,
   sessionReplaySampleRate: 100,
-  trackInteractions: true,
+  //trackInteractions: true,
+  trackUserInteractions:true,
   trackResources: true,
   trackLongTasks: true,
   defaultPrivacyLevel: "mask-user-input",
   allowedTracingUrls: [
-    { match: "https:\/\/dummyjson\.com", propagatorTypes: ["datadog"]}
+    { match: "https://dummyjson.com", propagatorTypes: ["datadog"]}
   ],
   beforeSend: (event) => {
     // remove email from view url
