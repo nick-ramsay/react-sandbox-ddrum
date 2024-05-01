@@ -15,16 +15,18 @@ datadogRum.init({
   env: "staging",
   // Specify a version number to identify the deployed version of your application in Datadog
   // version: '1.0.0',
-  sampleRate: 100,
-  sessionReplaySampleRate: 100,
+  sampleSampleRate: 100,
+  sessionReplaySampleRate: 20,
   //trackInteractions: true,
   trackUserInteractions:true,
+  startSessionReplayRecordingManually: true,
   trackResources: true,
   trackLongTasks: true,
   defaultPrivacyLevel: "mask-user-input",
   allowedTracingUrls: [
     { match: "https://dummyjson.com", propagatorTypes: ["datadog"]}
   ],
+  /*
   beforeSend: (event) => {
     // remove email from view url
     if (
@@ -36,11 +38,10 @@ datadogRum.init({
       console.log(event);
     }
     // console.log(event.action.target.name);
-    //event.view.url = event.view.url.replace(/email=[^&]*/, "email=REDACTED")
+    //event.view.url = event.view.url.replace(/email=[^&], "email=REDACTED")
   },
+  */
 });
-
-datadogRum.startSessionReplayRecording();
 
 datadogLogs.init({
   clientToken: keys.datadog.dd_client_token_rum,

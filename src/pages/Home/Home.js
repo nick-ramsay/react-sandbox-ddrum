@@ -70,6 +70,11 @@ const Home = () => {
       .then(json => console.log(json))
   }
 
+  const startSessionReplay = () => {
+    datadogRum.startSessionReplayRecording();
+    console.log("Called Start Session Replay Recording");
+  }
+
   useEffect(() => {
     renderMessages();
 
@@ -255,9 +260,14 @@ const Home = () => {
               </div>
             </div>
             <div className="row">
-              <div className="col-md-12 m-2">
+              <div className="col-md-6 mt-2">
                 <button className="btn btn-sm btn-outline-secondary" onClick={() => fetchDummyJson()}>
                   Call DummyJSON
+                </button>
+              </div>
+              <div className="col-md-6 mt-2">
+                <button className="btn btn-sm btn-outline-secondary" onClick={() => startSessionReplay()}>
+                  Start Session Replay
                 </button>
               </div>
             </div>
