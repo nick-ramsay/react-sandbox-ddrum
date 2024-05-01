@@ -41,6 +41,9 @@
   },
     "engines": {
       "node": "21.x"
+    },
+    "resolutions": {
+      "typescript": "4.9.5"
     }
   
 }
