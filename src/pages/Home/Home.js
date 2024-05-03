@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { datadogRum } from "@datadog/browser-rum";
 import { datadogLogs } from "@datadog/browser-logs";
-import { useInput } from "../../sharedFunctions/sharedFunctions";
+import { } from "../../sharedFunctions/sharedFunctions";
 import logo from "../../../src/logo.svg";
 import GithubLogo from "../../images/github_logos/GitHub_Logo_White.png";
 import "./style.css";
@@ -33,7 +33,6 @@ const weekday = [
 
 const Home = () => {
   var [messages, setMessages] = useState([]);
-  var [testHook, setTestHook] = useInput();
 
   const renderMessages = () => {
     let currentMessages = localStorage.getItem("messages");
@@ -70,29 +69,18 @@ const Home = () => {
       .then(json => console.log(json))
   }
 
-  const startSessionReplay = () => {
-    datadogRum.startSessionReplayRecording();
-    console.log("Called Start Session Replay Recording");
+  const triggerError = () => {
+    const obj = {};
+    const a = obj.name.surname;
+    console.log(a) // <-- Just to get rid of terminal warning about "a" not being used
+  }
+
+  const applyGlobalContextAttribute = () => {
+      datadogRum.setGlobalContextProperty("my_custom_attribute.message", "Congrats! You applied a global context attribute...")
   }
 
   useEffect(() => {
     renderMessages();
-
-    let startTime = 0;
-
-    setTimeout(() => {
-      startTime = Date.now();
-    }, 200);
-
-    setTimeout(() => {
-      console.log(Date.now() - startTime);
-
-      /*
-      datadogRum.setGlobalContextProperty("time_diff", {
-        time_diff: Date.now() - startTime,
-      });
-      */
-    }, 1300);
   }, []);
 
   let datadogTrackingUuid = "Testing123Uuid";
@@ -213,7 +201,7 @@ const Home = () => {
               <div className="col-md-3">
                 <button
                   className="btn btn-sm btn-outline-danger m-2"
-                  onClick={() => setTestHook((testHook) => "")}
+                  onClick={() => triggerError()}
                 >
                   Trigger Error
                 </button>
@@ -222,11 +210,9 @@ const Home = () => {
                 <button
                   className="btn btn-sm btn-outline-danger m-2"
                   onClick={() => {
-                    console.log(datadogRum.getInternalContext().session_id);
                     datadogRum.addError("My error message goes here", {
                       session_id: datadogRum.getInternalContext().session_id,
-                      name: "Lily",
-                      color: "White",
+                      name: "This was my manually triggered error"
                     });
                   }}
                 >
@@ -266,8 +252,8 @@ const Home = () => {
                 </button>
               </div>
               <div className="col-md-6 mt-2">
-                <button className="btn btn-sm btn-outline-secondary" onClick={() => startSessionReplay()}>
-                  Start Session Replay
+                <button className="btn btn-sm btn-outline-primary" onClick={() => applyGlobalContextAttribute()}>
+                  Apply Global Context
                 </button>
               </div>
             </div>
