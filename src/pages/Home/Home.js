@@ -195,6 +195,11 @@ const Home = () => {
             ))}
           </div>
           <hr></hr>
+          <h5>Visit New View</h5>
+          <div className="col-md-12 pt-3 pb-3">
+            <button className="btn btn-sm btn-outline-light" onClick={() => window.location.href="./alternate-view"}>Go to Alternative View</button>
+          </div>
+          <hr></hr>
           <h5>Manually Trigger RUM Events</h5>
           <div className="col-md-12 pt-3 pb-3">
             <div className="row">
@@ -257,8 +262,7 @@ const Home = () => {
                 </button>
               </div>
             </div>
-            <hr></hr>
-            <div className="row mt-2">
+            <div className="row mt-4">
               <a
                 href="https://github.com/nick-ramsay/react-sandbox-ddrum"
                 target="_blank"
