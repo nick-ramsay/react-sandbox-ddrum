@@ -31,7 +31,7 @@ const weekday = [
   "Sunday",
 ];
 
-const Home = () => {
+const Alternate = () => {
   var [messages, setMessages] = useState([]);
 
   const renderMessages = () => {
@@ -83,31 +83,14 @@ const Home = () => {
     renderMessages();
   }, []);
 
-  let datadogTrackingUuid = "Testing123Uuid";
-  let redirectUri = "Testing123Uri";
-
   return (
     <div>
       <div className="App">
         <header className="App-header p-4">
-          <h1
-            onClick={() => {
-              datadogRum.addAction("starting exchangeAuthCode", {
-                ts: new Date().toISOString(),
-                datadogTrackingUuid,
-              });
-              datadogRum.addError(
-                new Error("codeVerifier is null in exchangeAuthCode"),
-                {
-                  ts: new Date().toISOString(),
-                  datadogTrackingUuid,
-                  redirectUri,
-                }
-              );
-            }}
-          >
+          <h1>
             React Sandbox for Datadog RUM
           </h1>
+          <h4><code>Home Page</code></h4>
           <img src={logo} className="App-logo" alt="logo" />
           <p>
             Edit <code>src/pages/Home/Home.js</code> and save to reload.
@@ -197,7 +180,7 @@ const Home = () => {
           <hr></hr>
           <h5>Visit New View</h5>
           <div className="col-md-12 pt-3 pb-3">
-            <button className="btn btn-sm btn-outline-light" onClick={() => window.location.href="./alternate-view"}>Go to Alternative View</button>
+            <button className="btn btn-sm btn-outline-light" onClick={() => window.location.href="./alternate"}>Go to Alternative View</button>
           </div>
           <hr></hr>
           <h5>Manually Trigger RUM Events</h5>
@@ -280,4 +263,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Alternate;

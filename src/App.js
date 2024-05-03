@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
 
 import Home from "../src/pages/Home/Home";
+import Alternate from "../src/pages/Alternate/Alternate";
 
 datadogRum.init({
   applicationId: keys.datadog.dd_app_id_rum,
@@ -40,6 +41,7 @@ function App() {
     <Router>
       <Routes>
         <Route exact path="/" element={<Home />} />
+        <Route exact path="/alternate" element={<Alternate />} />
       </Routes>
     </Router>
   );
