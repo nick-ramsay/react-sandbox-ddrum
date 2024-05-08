@@ -64,16 +64,44 @@ const Home = () => {
     renderMessages();
   };
 
+  //START: Datadog RUM Functions
+
+  const triggerRuntimeError = () => {
+    const obj = {};
+    const a = obj.name.surname;
+    console.log(a) // ⬅️ Just to get rid of terminal warning about "a" not being used
+  }
+
+  const generateManualRumError = () => {
+      datadogRum.addError("My error message goes here", {
+        session_id: datadogRum.getInternalContext().session_id,
+        name: "This was my manually triggered error"
+      });
+  }
+
+  const generateBrowserLogs = () => {
+    datadogLogs.logger.info(
+      "User clicked 'Generate Browser Log' button - INFO level",
+      { custom_timestamp: new Date() }
+    );
+    datadogLogs.logger.warn(
+      "User clicked 'Generate Browser Log' button - WARN level",
+      { custom_timestamp: new Date() }
+    );
+    datadogLogs.logger.error(
+      "User clicked 'Generate Browser Log' button - ERROR level",
+      { custom_timestamp: new Date() }
+    );
+    datadogLogs.logger.debug(
+      "User clicked 'Generate Browser Log' button - DEBUG level",
+      { custom_timestamp: new Date() }
+    );
+  }
+
   const fetchDummyJson = () => {
     fetch('https://dummyjson.com/products/1')
       .then(res => res.json())
       .then(json => console.log(json))
-  }
-
-  const triggerError = () => {
-    const obj = {};
-    const a = obj.name.surname;
-    console.log(a) // <-- Just to get rid of terminal warning about "a" not being used
   }
 
   const applyGlobalContextAttribute = () => {
@@ -85,7 +113,8 @@ const Home = () => {
     datadogRum.setGlobalContextProperty("tag_string", item_1);
     datadogRum.setGlobalContextProperty("tag_array", [item_1, item_2, item_3]);
   }
-
+//END: Datadog RUM Functions
+  
   const saveNewMessageEnterKey = () => {
     var input = document.getElementById("messageInput");
     var saveBtn = document.getElementById("submitNewMessageBtn");
@@ -106,7 +135,6 @@ const Home = () => {
       }
     });
   }
-
 
   useEffect(() => {
     renderMessages();
@@ -221,35 +249,25 @@ const Home = () => {
               <div className="col-md-3">
                 <button
                   className="btn btn-sm btn-outline-danger m-2"
-                  onClick={() => triggerError()}
+                  onClick={() => triggerRuntimeError()}
                 >
-                  Trigger Error
+                  Trigger Runtime Error
                 </button>
               </div>
               <div className="col-md-3">
                 <button
                   className="btn btn-sm btn-outline-danger m-2"
-                  onClick={() => {
-                    datadogRum.addError("My error message goes here", {
-                      session_id: datadogRum.getInternalContext().session_id,
-                      name: "This was my manually triggered error"
-                    });
-                  }}
+                  onClick={() => generateManualRumError()}
                 >
-                  Generate Manual Error
+                  Generate Manual RUM Error Event
                 </button>
               </div>
               <div className="col-md-3">
                 <button
                   className="btn btn-sm btn-outline-warning m-2"
-                  onClick={() =>
-                    datadogLogs.logger.warn(
-                      "User clicked 'Generate Browser Log' button",
-                      { custom_timestamp: new Date() }
-                    )
-                  }
+                  onClick={() => generateBrowserLogs()}
                 >
-                  Generate Browser Log
+                  Generate Browser Logs
                 </button>
               </div>
               <div className="col-md-3">
