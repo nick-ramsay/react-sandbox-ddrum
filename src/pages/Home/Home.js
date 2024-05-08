@@ -76,8 +76,42 @@ const Alternate = () => {
   }
 
   const applyGlobalContextAttribute = () => {
-      datadogRum.setGlobalContextProperty("my_custom_attribute.message", "Congrats! You applied a global context attribute...")
+    let item_1 = String(Math.round(Math.random() * 100000));
+    let item_2 = String(Math.round(Math.random() * 100000));
+    let item_3 = String(Math.round(Math.random() * 100000));
+
+    datadogRum.setGlobalContextProperty("my_custom_attribute.message", "Congrats! You applied a global context attribute...");
+    datadogRum.setGlobalContextProperty("tag_string", item_1);
+    datadogRum.setGlobalContextProperty("tag_array", [item_1, item_2, item_3]);
   }
+
+  const saveNewMessageEnterKey = () => {
+    var input = document.getElementById("messageInput");
+    var saveBtn = document.getElementById("submitNewMessageBtn");
+
+    // Execute a function when the user presses a key on the keyboard
+    input.addEventListener("keypress", (event) => {
+      // If the user presses the "Enter" key on the keyboard
+      if (event.key === "Enter") {
+        // Cancel the default action, if needed
+        event.preventDefault();
+        // Trigger the button element with a click
+        document.getElementById("submitNewMessageBtn").click();
+      }
+    });
+
+    // Execute a function when the user presses a key on the keyboard
+    saveBtn.addEventListener("keypress", (event) => {
+      // If the user presses the "Enter" key on the keyboard
+      if (event.key === "Enter") {
+        // Cancel the default action, if needed
+        event.preventDefault();
+        // Trigger the button element with a click
+        document.getElementById("submitNewMessageBtn").click();
+      }
+    });
+  }
+
 
   useEffect(() => {
     renderMessages();
@@ -116,6 +150,7 @@ const Alternate = () => {
                     id="messageInput"
                     name="messageInput"
                     aria-describedby="messageHelp"
+                    onKeyUp={saveNewMessageEnterKey}
                   />
                 </div>
               </div>
@@ -123,9 +158,11 @@ const Alternate = () => {
                 <div className="col mt-3">
                   <div
                     type="button"
+                    id="submitNewMessageBtn"
                     className="btn btn-sm btn-custom"
                     tabIndex="0"
                     onClick={saveMessage}
+                    onKeyUp={saveNewMessageEnterKey}
                     data-dd-action-name="Clicked Custom Action Button Again"
                   >
                     Submit
@@ -180,7 +217,7 @@ const Alternate = () => {
           <hr></hr>
           <h5>Visit New View</h5>
           <div className="col-md-12 pt-3 pb-3">
-            <button className="btn btn-sm btn-outline-light" onClick={() => window.location.href="./alternate"}>Go to Alternative View</button>
+            <button className="btn btn-sm btn-outline-light" onClick={() => window.location.href = "./alternate"}>Go to Alternative View</button>
           </div>
           <hr></hr>
           <h5>Manually Trigger RUM Events</h5>
@@ -234,13 +271,13 @@ const Alternate = () => {
               </div>
             </div>
             <div className="row">
-              <div className="col-md-6 mt-2">
-                <button className="btn btn-sm btn-outline-secondary" onClick={() => fetchDummyJson()}>
+              <div className="col-md-6">
+                <button className="btn btn-sm btn-outline-secondary m-2" onClick={() => fetchDummyJson()}>
                   Call DummyJSON
                 </button>
               </div>
-              <div className="col-md-6 mt-2">
-                <button className="btn btn-sm btn-outline-primary" onClick={() => applyGlobalContextAttribute()}>
+              <div className="col-md-6">
+                <button className="btn btn-sm btn-outline-primary m-2" onClick={() => applyGlobalContextAttribute()}>
                   Apply Global Context
                 </button>
               </div>
