@@ -31,7 +31,7 @@ const weekday = [
   "Sunday",
 ];
 
-const Alternate = () => {
+const Home = () => {
   var [messages, setMessages] = useState([]);
 
   const renderMessages = () => {
@@ -51,6 +51,7 @@ const Alternate = () => {
       });
       localStorage.setItem("messages", JSON.stringify(tempMessages));
       document.getElementById("messageInput").value = "";
+      document.getElementById("messageInput").focus();
       renderMessages();
     }
   };
@@ -89,25 +90,19 @@ const Alternate = () => {
     var input = document.getElementById("messageInput");
     var saveBtn = document.getElementById("submitNewMessageBtn");
 
-    // Execute a function when the user presses a key on the keyboard
     input.addEventListener("keypress", (event) => {
-      // If the user presses the "Enter" key on the keyboard
       if (event.key === "Enter") {
-        // Cancel the default action, if needed
         event.preventDefault();
-        // Trigger the button element with a click
         document.getElementById("submitNewMessageBtn").click();
+        input.focus();
       }
     });
 
-    // Execute a function when the user presses a key on the keyboard
     saveBtn.addEventListener("keypress", (event) => {
-      // If the user presses the "Enter" key on the keyboard
       if (event.key === "Enter") {
-        // Cancel the default action, if needed
         event.preventDefault();
-        // Trigger the button element with a click
         document.getElementById("submitNewMessageBtn").click();
+        input.focus();
       }
     });
   }
@@ -300,4 +295,4 @@ const Alternate = () => {
   );
 };
 
-export default Alternate;
+export default Home;
