@@ -51,7 +51,6 @@ const Home = () => {
       });
       localStorage.setItem("messages", JSON.stringify(tempMessages));
       document.getElementById("messageInput").value = "";
-      document.getElementById("messageInput").focus();
       renderMessages();
     }
   };
@@ -63,7 +62,7 @@ const Home = () => {
     localStorage.setItem("messages", JSON.stringify(currentMessages));
     renderMessages();
   };
-
+  ////////////////////////////////////////
   //START: Datadog RUM Functions
 
   const triggerRuntimeError = () => {
@@ -114,6 +113,7 @@ const Home = () => {
     datadogRum.setGlobalContextProperty("tag_array", [item_1, item_2, item_3]);
   }
 //END: Datadog RUM Functions
+///////////////////////////////////////////
   
   const saveNewMessageEnterKey = () => {
     var input = document.getElementById("messageInput");

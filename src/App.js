@@ -18,13 +18,20 @@ datadogRum.init({
   sampleSampleRate: 100,
   sessionReplaySampleRate: 100,
   trackUserInteractions: true,
-  startSessionReplayRecordingManually: true,
+  startSessionReplayRecordingManually: false,
   trackResources: true,
   trackLongTasks: true,
   defaultPrivacyLevel: "mask-user-input",
   allowedTracingUrls: [
     { match: "https://dummyjson.com", propagatorTypes: ["datadog"] }
   ],
+  beforeSend: (event, context) => {
+    // collect a RUM resource's response headers
+    if (event.type === 'action' && event.action.target.name === "Apply Global Context") {
+      event.context.beforeSendContextAttribute = "This attribute was applied by beforeSend when clicking the 'Apply Global Context' button."
+    }
+    return true
+  },
 });
 
 datadogLogs.init({
