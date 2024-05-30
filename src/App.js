@@ -22,9 +22,7 @@ datadogRum.init({
   trackResources: true,
   trackLongTasks: true,
   defaultPrivacyLevel: "mask-user-input",
-  allowedTracingUrls: [
-    { match: "https://dummyjson.com", propagatorTypes: ["datadog"] }
-  ],
+  allowedTracingUrls: ["https://dummyjson.com"],
   beforeSend: (event, context) => {
     // collect a RUM resource's response headers
     if (event.type === 'action' && event.action.target.name === "Apply Global Context") {
