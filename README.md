@@ -68,3 +68,17 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+---
+
+## Instructions for Building Docker Image & Starting Container
+
+1. Build Docker Image
+```
+docker build -t react-sandbox-ddrum .
+```
+
+2. Run Docker Container
+```
+docker run --expose 3000 react-sandbox-ddrum
+```

@@ -68,7 +68,7 @@ const Home = () => {
   const triggerRuntimeError = () => {
     const obj = {};
     const a = obj.name.surname;
-    console.log(a) // ⬅️ Just to get rid of terminal warning about "a" not being used
+    console.log(a) // ⬅️ - Just to get rid of warning about "a" not being used
   }
 
   const generateManualRumError = () => {

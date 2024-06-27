@@ -11,6 +11,9 @@
 # production
 /build
 
+#Datadog Source Map Upload
+dd_source_map_upload.txt
+
 # misc
 .env
 .DS_Store
