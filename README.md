@@ -80,5 +80,11 @@ docker build -t react-sandbox-ddrum .
 
 2. Run Docker Container
 ```
-docker run --expose 3000 react-sandbox-ddrum
+docker run \
+-e REACT_APP_APP_ID_RUM=<application_id> \
+-e REACT_APP_CLIENT_TOKEN_RUM=<client_token> \
+-e REACT_APP_DD_SITE=datadoghq.com \
+-e VERSION=2.0.3 \
+-p 3000:3000 \
+react-sandbox-ddrum
 ```

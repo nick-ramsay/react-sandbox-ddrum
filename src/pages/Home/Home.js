@@ -112,6 +112,15 @@ const Home = () => {
     datadogRum.setGlobalContextProperty("tag_string", item_1);
     datadogRum.setGlobalContextProperty("tag_array", [item_1, item_2, item_3]);
   }
+
+  const applyUser = () => {
+    datadogRum.setUser({
+      id: '1234',
+      name: 'John Doe',
+      email: 'john@doe.com',
+      plan: 'premium'
+    })
+  }
 //END: Datadog RUM Functions
 ///////////////////////////////////////////
   
@@ -138,6 +147,7 @@ const Home = () => {
 
   useEffect(() => {
     renderMessages();
+    applyUser()
   }, []);
 
   return (

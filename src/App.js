@@ -14,7 +14,7 @@ datadogRum.init({
   site: keys.datadog.dd_site,
   service: "react-sandbox-ddrum",
   env: "staging",
-  version: '2.0.0',
+  version: keys.datadog.dd_version,
   sampleSampleRate: 100,
   sessionReplaySampleRate: 100,
   trackUserInteractions: true,
@@ -37,7 +37,7 @@ datadogLogs.init({
   site: keys.datadog.dd_site,
   forwardErrorsToLogs: true,
   forwardConsoleLogs: "all",
-  sessionSampleRate: 100,
+  sessionSampleRate: 50,
   telemetrySampleRate: 100,
 });
 
