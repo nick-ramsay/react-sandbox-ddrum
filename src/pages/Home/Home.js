@@ -32,7 +32,12 @@ const weekday = [
 ];
 
 const Home = () => {
-  var [messages, setMessages] = useState([]);
+  const [message, setMessage] = useState('')
+  const [messages, setMessages] = useState([]);
+
+  const handleChange = (e) => {
+    setMessage(e.target.value);
+  };
 
   const renderMessages = () => {
     let currentMessages = localStorage.getItem("messages");
@@ -43,14 +48,14 @@ const Home = () => {
 
   const saveMessage = (event) => {
     let tempMessages = messages;
-    let newMessage = document.getElementById("messageInput").value;
-    if (newMessage !== "") {
+    //let newMessage = document.getElementById("messageInput").value;
+    if (message !== "") {
       tempMessages.unshift({
         date: Date(),
-        message: newMessage,
+        message: message,
       });
       localStorage.setItem("messages", JSON.stringify(tempMessages));
-      document.getElementById("messageInput").value = "";
+      setMessage(message => "");
       renderMessages();
     }
   };
@@ -182,6 +187,8 @@ const Home = () => {
                     className="form-control"
                     id="messageInput"
                     name="messageInput"
+                    value={message}
+                    onChange={handleChange}
                     aria-describedby="messageHelp"
                     onKeyUp={saveNewMessageEnterKey}
                   />
