@@ -16,7 +16,7 @@ dd_source_map_upload.txt
 
 # misc
 .env
-docker-readme.md
+my_docker_commands.md
 .DS_Store
 .env.local
 .env.development.local

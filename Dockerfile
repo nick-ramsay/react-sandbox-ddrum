@@ -10,6 +10,9 @@ COPY package*.json ./
 # Install dependencies
 RUN yarn install
 
+# Install datadog-ci tool
+RUN yarn global add @datadog/datadog-ci
+
 # Copy the rest of the application code
 COPY . .
 
