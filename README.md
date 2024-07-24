@@ -1,5 +1,15 @@
 ## Instructions for Building Docker Image & Starting Container
 
+### Prerequisites in Datadog
+To get started with Datadog RUM on this application, you’ll want to first create a RUM application in your Datadog org. To do this, navigate `UX Monitoring` → `RUM Applications`. Select `+ New Application` at the top of the page and select JavaScript (JS).
+
+Once you do this, you should see the snippet of the RUM initialisation code to use in the application. You’ll want to select the npm initialisation method, where you’ll see a JavaScript snippet which looks similar to below. You’ll be using the `applicationId` and `clientToken` values in the following steps:
+
+![react-sandbox-ddrum_rum_app_screenshot.png](https://github.com/nick-ramsay/readme-images/blob/master/react-sandbox-ddrum/react-sandbox-ddrum_rum_app_screenshot.png?raw=true)
+
+Now that you’ve created your RUM application in Datadog, please follow the instructions below to build and run the application.
+
+### Docker Steps
 1. Build Docker Image
 ```
 docker build -t react-sandbox-ddrum .
