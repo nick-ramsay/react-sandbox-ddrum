@@ -35,7 +35,7 @@ export DATADOG_API_KEY=<YOUR_DATADOG_API_KEY>
 
 datadog-ci sourcemaps upload ./build/static/js \
   --service=react-sandbox-ddrum \
-  --release-version=<VERSION_VALUE_FOR_CURRENT_BUILD> \
+  --release-version=<version_value_for_build__same_as_rum_version_value_above> \
   --minified-path-prefix=http://localhost:3000/static/js
 ```
 
