@@ -1,0 +1,14 @@
+services:
+  client:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mongo
+    environment:
+      - REACT_APP_APP_ID_RUM=<YOUR_RUM_APPLICATION_ID>
+      - REACT_APP_CLIENT_TOKEN_RUM=<YOUR_RUM_CLIENT_TOKEN>
+      - REACT_APP_DD_SITE=datadoghq.com
+      - REACT_APP_VERSION=<YOUR_RUM_VERSION>
