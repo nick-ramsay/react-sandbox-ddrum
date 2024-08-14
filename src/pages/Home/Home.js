@@ -77,10 +77,10 @@ const Home = () => {
   }
 
   const generateManualRumError = () => {
-      datadogRum.addError("My error message goes here", {
-        session_id: datadogRum.getInternalContext().session_id,
-        name: "This was my manually triggered error"
-      });
+    datadogRum.addError("My error message goes here", {
+      session_id: datadogRum.getInternalContext().session_id,
+      name: "This was my manually triggered error"
+    });
   }
 
   const generateBrowserLogs = () => {
@@ -126,9 +126,9 @@ const Home = () => {
       plan: 'premium'
     })
   }
-//END: Datadog RUM Functions
-///////////////////////////////////////////
-  
+  //END: Datadog RUM Functions
+  ///////////////////////////////////////////
+
   const saveNewMessageEnterKey = () => {
     var input = document.getElementById("messageInput");
     var saveBtn = document.getElementById("submitNewMessageBtn");
@@ -177,156 +177,162 @@ const Home = () => {
           </a>
         </header>
         <div className="container">
-          <div className="col-md-12">
-            <form className="mt-3">
-              <div className="form-row text-center">
-                <div className="col">
-                  <input
-                    type="text"
-                    placeholder="Enter your message here"
-                    className="form-control"
-                    id="messageInput"
-                    name="messageInput"
-                    value={message}
-                    onChange={handleChange}
-                    aria-describedby="messageHelp"
-                    onKeyUp={saveNewMessageEnterKey}
-                  />
-                </div>
-              </div>
-              <div className="form-row text-center">
-                <div className="col mt-3">
-                  <div
-                    type="button"
-                    id="submitNewMessageBtn"
-                    className="btn btn-sm btn-custom"
-                    tabIndex="0"
-                    onClick={saveMessage}
-                    onKeyUp={saveNewMessageEnterKey}
-                    data-dd-action-name="Clicked Custom Action Button Again"
-                  >
-                    Submit
-                  </div>
-                </div>
-              </div>
-            </form>
-            <hr></hr>
-            <h5>Message List</h5>
-            <p style={{ color: "#e83e8c" }} className=" mb-1">
-              {messages.length === 0
-                ? "No Messages"
-                : messages.length +
-                (messages.length > 1 ? " messages" : " message")}
-            </p>
-            {messages.map((message, i) => (
-              <div className="col-md-12 mt-2 mb-2 message-card" key={i}>
-                <div className="pt-1">
-                  <div style={{ fontStyle: "italic" }} className="mt-1 mb-1">
-                    "{message.message}"
-                  </div>
-                  <div style={{ color: "#61dafb" }} className="mb-2">
-                    {weekday[new Date(message.date).getDay()] +
-                      ", " +
-                      new Date(message.date).getDate() +
-                      " " +
-                      month[new Date(message.date).getMonth()] +
-                      " " +
-                      new Date(message.date).getFullYear() +
-                      " " +
-                      (new Date(message.date).getHours() < 13
-                        ? new Date(message.date).getHours()
-                        : new Date(message.date).getHours() - 12) +
-                      ":" +
-                      (new Date(message.date).getMinutes() > 9
-                        ? new Date(message.date).getMinutes()
-                        : "0" + new Date(message.date).getMinutes()) +
-                      " " +
-                      (new Date(message.date).getHours() > 11 ? "PM" : "AM")}
-                  </div>
-                  <div
-                    className="btn btn-sm btn-custom-red mb-1 mt-1"
-                    data-message_id={i}
-                    onClick={deleteMessage}
-                  >
-                    Delete
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-          <hr></hr>
-          <h5>Visit New View</h5>
-          <div className="col-md-12 pt-3 pb-3">
-            <button className="btn btn-sm btn-outline-light" onClick={() => window.location.href = "./alternate"}>Go to Alternative View</button>
-          </div>
-          <hr></hr>
-          <h5>Manually Trigger RUM Events</h5>
-          <div className="col-md-12 pt-3 pb-3">
-            <div className="row">
-              <div className="col-md-3">
-                <button
-                  className="btn btn-sm btn-outline-danger m-2"
-                  onClick={() => triggerRuntimeError()}
-                >
-                  Trigger Runtime Error
-                </button>
-              </div>
-              <div className="col-md-3">
-                <button
-                  className="btn btn-sm btn-outline-danger m-2"
-                  onClick={() => generateManualRumError()}
-                >
-                  Generate Manual RUM Error Event
-                </button>
-              </div>
-              <div className="col-md-3">
-                <button
-                  className="btn btn-sm btn-outline-warning m-2"
-                  onClick={() => generateBrowserLogs()}
-                >
-                  Generate Browser Logs
-                </button>
-              </div>
-              <div className="col-md-3">
-                <button
-                  className="btn btn-sm btn-outline-light m-2"
-                  data-dd-action-name="Clicked Custom Action Button Again"
-                  data-dd-action-example_id="123customid456"
-                  onClick={() => {
-                    console.log("Clicked custom action button!");
-                  }}
-                >
-                  Custom Action Name
-                </button>
+
+          <form className="mt-3">
+            <div className="form-row text-center">
+              <div className="col">
+                <input
+                  type="text"
+                  placeholder="Enter your message here"
+                  className="form-control"
+                  id="messageInput"
+                  name="messageInput"
+                  value={message}
+                  onChange={handleChange}
+                  aria-describedby="messageHelp"
+                  onKeyUp={saveNewMessageEnterKey}
+                />
               </div>
             </div>
-            <div className="row">
-              <div className="col-md-6">
-                <button className="btn btn-sm btn-outline-secondary m-2" onClick={() => fetchDummyJson()}>
-                  Call DummyJSON
-                </button>
-              </div>
-              <div className="col-md-6">
-                <button className="btn btn-sm btn-outline-primary m-2" onClick={() => applyGlobalContextAttribute()}>
-                  Apply Global Context
-                </button>
+            <div className="form-row text-center">
+              <div className="col mt-3">
+                <div
+                  type="button"
+                  id="submitNewMessageBtn"
+                  className="btn btn-sm btn-custom"
+                  tabIndex="0"
+                  onClick={saveMessage}
+                  onKeyUp={saveNewMessageEnterKey}
+                >
+                  Submit
+                </div>
               </div>
             </div>
-            <div className="row mt-4">
-              <a
-                href="https://github.com/nick-ramsay/react-sandbox-ddrum"
-                target="_blank"
-                rel="noopener noreferrer"
-                title="Check out this repo on GitHub!"
-                className="github-link"
-              >
-                <img className="github-logo" src={GithubLogo} alt="GitHub_logo" />
-              </a>
+          </form>
+       
+          <p style={{ color: "#e83e8c" }} className="mt-2 mb-1">
+            {messages.length === 0
+              ? "No Messages"
+              : messages.length +
+              (messages.length > 1 ? " messages" : " message")}
+          </p>
+          {messages.map((message, i) => (
+            <div className="col-md-12 mt-2 mb-2 message-card" key={i}>
+              <div className="pt-1">
+                <div style={{ fontStyle: "italic" }} className="mt-1 mb-1">
+                  "{message.message}"
+                </div>
+                <div style={{ color: "#61dafb" }} className="mb-2">
+                  {weekday[new Date(message.date).getDay()] +
+                    ", " +
+                    new Date(message.date).getDate() +
+                    " " +
+                    month[new Date(message.date).getMonth()] +
+                    " " +
+                    new Date(message.date).getFullYear() +
+                    " " +
+                    (new Date(message.date).getHours() < 13
+                      ? new Date(message.date).getHours()
+                      : new Date(message.date).getHours() - 12) +
+                    ":" +
+                    (new Date(message.date).getMinutes() > 9
+                      ? new Date(message.date).getMinutes()
+                      : "0" + new Date(message.date).getMinutes()) +
+                    " " +
+                    (new Date(message.date).getHours() > 11 ? "PM" : "AM")}
+                </div>
+                <div
+                  className="btn btn-sm btn-custom-red mb-1 mt-1"
+                  data-message_id={i}
+                  onClick={deleteMessage}
+                  data-dd-privacy="allow"
+                >
+                  Delete
+                </div>
+              </div>
             </div>
+          ))}
+         <hr></hr>
+          <div className="row">
+            <div className="col-md-12">
+              <div class="accordion accordion-flush" data-bs-theme="dark" id="accordionAdditionalRumFunctions">
+                <div class="accordion-item">
+                  <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#additional-rum-functions" aria-expanded="false" aria-controls="flush-collapseOne">
+                      Additional RUM Functionality
+                    </button>
+                  </h2>
+                  <div id="additional-rum-functions" class="accordion-collapse collapse" data-bs-parent="#accordionAdditionalRumFunctions">
+                    <div class="accordion-body">
+                      <div className="row">
+                        <div className="col-md-6">
+                          <button
+                            className="btn btn-sm btn-outline-danger"
+                            onClick={() => triggerRuntimeError()}
+                          >
+                            Trigger Runtime Error
+                          </button>
+                        </div>
+                        <div className="col-md-6">
+                          <button
+                            className="btn btn-sm btn-outline-danger"
+                            onClick={() => generateManualRumError()}
+                          >
+                            Generate Manual RUM Error Event
+                          </button>
+                        </div>
+                      </div>
+                      <div className="row mt-2">
+                        <div className="col-md-6">
+                          <button
+                            className="btn btn-sm btn-outline-warning"
+                            onClick={() => generateBrowserLogs()}
+                          >
+                            Generate Browser Logs
+                          </button>
+                        </div>
+                        <div className="col-md-6">
+                          <button className="btn btn-sm btn-outline-secondary" onClick={() => fetchDummyJson()}>
+                            Call DummyJSON
+                          </button>
+                        </div>
+                      </div>
+                      <div className="row mt-2">
+                        <div className="col-md-6">
+                          <button className="btn btn-sm btn-outline-primary" onClick={() => applyGlobalContextAttribute()}>
+                            Apply Global Context
+                          </button>
+                        </div>
+                        <div className="col-md-6">
+                          <button className="btn btn-sm btn-outline-light" onClick={() => window.location.href = "./alternate"}>Go to Alternative View</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
           </div>
-        </div>
-      </div>
-    </div>
+
+          <div className="row mt-4">
+            <a
+              href="https://github.com/nick-ramsay/react-sandbox-ddrum"
+              target="_blank"
+              rel="noopener noreferrer"
+              title="Check out this repo on GitHub!"
+              className="github-link"
+            >
+              <img className="github-logo" src={GithubLogo} alt="GitHub_logo" />
+            </a>
+          </div>
+
+
+
+        </div >
+      </div >
+    </div >
   );
 };
 

@@ -21,14 +21,12 @@ datadogRum.init({
   startSessionReplayRecordingManually: false,
   trackResources: true,
   trackLongTasks: true,
-  defaultPrivacyLevel: "mask-user-input",
+  defaultPrivacyLevel: 'mask-user-input',
   allowedTracingUrls: ["https://dummyjson.com"],
   beforeSend: (event, context) => {
-    // collect a RUM resource's response headers
     if (event.type === 'action' && event.action.target.name === "Apply Global Context") {
       event.context.beforeSendContextAttribute = "This attribute was applied by beforeSend when clicking the 'Apply Global Context' button."
     }
-    return true
   },
 });
 
@@ -37,10 +35,9 @@ datadogLogs.init({
   site: keys.datadog.dd_site,
   forwardErrorsToLogs: true,
   forwardConsoleLogs: "all",
-  sessionSampleRate: 50,
+  sessionSampleRate: 100,
   telemetrySampleRate: 100,
 });
-
 
 function App() {
   return (
