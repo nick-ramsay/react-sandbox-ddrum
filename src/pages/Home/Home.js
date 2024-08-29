@@ -119,12 +119,14 @@ const Home = () => {
   }
 
   const applyUser = () => {
-    datadogRum.setUser({
+    let userDetails = {
       id: '1234',
       name: 'John Doe',
       email: 'john@doe.com',
       plan: 'premium'
-    })
+    }
+    datadogRum.setUser(userDetails);
+    datadogLogs.setUser(userDetails);
   }
   //END: Datadog RUM Functions
   ///////////////////////////////////////////
